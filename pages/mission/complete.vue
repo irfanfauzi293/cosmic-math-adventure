@@ -59,7 +59,7 @@ const goToMap = () => {
         HORE! KAMU HEBAT,<br>KAPTEN!
       </h1>
       <p class="text-xl md:text-2xl text-primary font-bold mb-12">
-        Semua misi luar angkasa telah selesai!
+        Misi ini berhasil diselesaikan!
       </p>
 
       <div class="flex flex-col md:flex-row gap-4 w-full max-w-md">
@@ -78,7 +78,7 @@ const goToMap = () => {
 
         <AnswerBubble 
           variant="primary" 
-          label="Kembali ke Peta" 
+          label="Ke Peta" 
           class="flex-1 w-full text-xl py-4"
           @click="goToMap"
         >
