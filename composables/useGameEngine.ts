@@ -42,17 +42,34 @@ export const useGameEngine = (missionId: number) => {
         newOpts = generateOptions(n, 3)
       } 
       else if (missionId === 2) { // Addition
-        const a = Math.floor(Math.random() * 9) + 1
-        const b = Math.floor(Math.random() * (10 - a)) + 1 // a+b <= 10
-        newQ = { left: a, right: b, operator: '+', answer: a + b }
-        newOpts = generateOptions(a + b, 4)
+        // Tentukan totalnya dulu (antara 3 sampai 10)
+        const total = Math.floor(Math.random() * 8) + 3; 
+        
+        // Buat batas minimum untuk sisi kiri agar pembagiannya lebih seimbang (tidak berat sebelah)
+        // Misalnya jika total 10, sisi kiri minimal 3, jadi bisa 3+7, 4+6, 5+5, dsb. (mencegah 1+9)
+        const minA = Math.floor(total / 3) || 1;
+        const maxA = total - minA;
+        
+        const a = Math.floor(Math.random() * (maxA - minA + 1)) + minA;
+        const b = total - a; // Sisa satelit untuk sisi kanan
+        
+        newQ = { left: a, right: b, operator: '+', answer: total }
+        newOpts = generateOptions(total, 4)
       }
       else if (missionId === 3) { // Subtraction
-        // Ensure no negative answers by making total (a) >= eaten (b)
-        const a = Math.floor(Math.random() * 10) + 1
-        const b = Math.floor(Math.random() * a) + 1 
-        newQ = { total: a, eaten: b, answer: a - b }
-        newOpts = generateOptions(a - b, 3)
+        // Agar hasil pengurangan lebih bervariasi dan tidak terlalu sering 0, 1, atau 2
+        // Kita pilih hasil akhirnya (ans) dulu secara merata dari 2 sampai 8
+        const ans = Math.floor(Math.random() * 7) + 2; 
+        
+        // Lalu tentukan total kue (a) yang ada di awal (harus lebih besar dari ans, max 10)
+        const minA = ans + 1;
+        const a = Math.floor(Math.random() * (10 - minA + 1)) + minA;
+        
+        // Hitung berapa yang dimakan monster (b)
+        const b = a - ans; 
+        
+        newQ = { total: a, eaten: b, answer: ans }
+        newOpts = generateOptions(ans, 3)
       }
       else if (missionId === 4) { // Comparison
         let a = Math.floor(Math.random() * 10) + 1

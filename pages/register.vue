@@ -52,6 +52,34 @@ const handleRegister = async () => {
     router.push('/journey')
   }
 }
+
+const handleGuestLogin = async () => {
+  loading.value = true
+  errorMsg.value = ''
+  
+  const randomId = Math.floor(Math.random() * 1000000)
+  const guestUsername = `tamu_${randomId}`
+  const email = `${guestUsername}@cosmomath.com`
+  const guestPassword = `tamu_pass_${randomId}`
+
+  const { error } = await supabase.auth.signUp({
+    email,
+    password: guestPassword,
+    options: {
+      data: {
+        username: guestUsername,
+        display_name: `Tamu ${randomId.toString().substring(0, 3)}`
+      }
+    }
+  })
+
+  if (error) {
+    errorMsg.value = 'Gagal masuk sebagai tamu. Coba lagi.'
+    loading.value = false
+  } else {
+    router.push('/journey')
+  }
+}
 </script>
 
 <template>
@@ -110,6 +138,24 @@ const handleRegister = async () => {
         >
           <span v-if="loading" class="material-symbols-outlined animate-spin">sync</span>
           <span v-else>DAFTAR SEKARANG</span>
+        </AnswerBubble>
+
+        <div class="relative flex items-center py-2 mt-2">
+          <div class="flex-grow border-t border-outline-variant"></div>
+          <span class="flex-shrink-0 mx-4 text-on-surface-variant text-sm font-bold">ATAU</span>
+          <div class="flex-grow border-t border-outline-variant"></div>
+        </div>
+
+        <AnswerBubble 
+          type="button" 
+          variant="secondary" 
+          label="MAIN SEBAGAI TAMU" 
+          class="w-full py-4 text-xl"
+          :disabled="loading"
+          @click.prevent="handleGuestLogin"
+        >
+          <span v-if="loading" class="material-symbols-outlined animate-spin">sync</span>
+          <span v-else>MAIN SEBAGAI TAMU</span>
         </AnswerBubble>
       </form>
 
