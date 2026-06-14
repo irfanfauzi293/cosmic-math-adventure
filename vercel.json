@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "framework": "nuxtjs",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "outputDirectory": ".vercel/output",
+  "env": {
+    "NODE_VERSION": "18.x"
+  }
+}
