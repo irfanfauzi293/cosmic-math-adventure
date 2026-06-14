@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-on-surface font-sans;
+    margin: 0;
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Panel */
+  .glass-panel {
+    @apply bg-[rgba(21,26,49,0.6)] backdrop-blur-[20px] rounded-2xl border-[3px] border-[rgba(0,242,255,0.2)];
+  }
+
+  /* Bubbly Button - Base */
+  .btn-bubbly {
+    @apply font-bold rounded-2xl transition-all duration-150 active:translate-y-1 inline-flex items-center justify-center text-center;
+  }
+
+  /* Bubbly Button - Primary */
+  .btn-primary {
+    @apply btn-bubbly bg-primary text-on-primary shadow-[0_8px_0_0_rgba(0,0,0,0.3)] active:shadow-[0_2px_0_0_rgba(0,0,0,0.3)];
+  }
+
+  /* Bubbly Button - Secondary (Green) */
+  .btn-secondary {
+    @apply btn-bubbly bg-secondary text-on-secondary shadow-[0_8px_0_0_rgba(0,30,0,0.5)] active:shadow-[0_2px_0_0_rgba(0,30,0,0.5)];
+  }
+
+  /* Bubbly Button - Tertiary (Yellow) */
+  .btn-tertiary {
+    @apply btn-bubbly bg-tertiary text-black shadow-[0_8px_0_0_rgba(50,50,0,0.5)] active:shadow-[0_2px_0_0_rgba(50,50,0,0.5)];
+  }
+
+  /* Neon Glow effect */
+  .glow-cyan {
+    filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.4));
+  }
+  
+  .glow-yellow {
+    filter: drop-shadow(0 0 15px rgba(205, 205, 0, 0.5));
+  }
+  
+  .glow-green {
+    filter: drop-shadow(0 0 15px rgba(76, 227, 70, 0.4));
+  }
+}
+
+/* Base material icon styling to vertically align correctly */
+.material-symbols-outlined {
+  vertical-align: middle;
+  line-height: 1;
+}
